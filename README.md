@@ -16,7 +16,7 @@ Python PyCharm Plugin**). In any case, you will find information on how to get
 started with Python in the [Applications][doc] section of your device
 documentation.
 
-[Digi International][Digi] manages the project on GitHub as 
+[Digi International][Digi] manages the project on GitHub as
 [digi-python-resources][digi-python-resources].
 
 
@@ -38,10 +38,10 @@ The repository is structured in the following folders:
   standard API of your device. You can eiher import these libraries in your
   project using the **Digi Python PyCharm Plugin** or copy them manully inside
   your project structure.
-* **platforms** - This folder contains the definition and images for the 
+* **platforms** - This folder contains the definition and images for the
   Digi products supporting Python. This information is used by the **Digi
   Python PyCharm Plugin** to list the supported platforms.
-* **samples** - Files in the `samples/` directory are organized by feature. 
+* **samples** - Files in the `samples/` directory are organized by feature.
   For example, `network` contains samples related to XBee networks and
   `configuration` contains samples demontstrating how to configure XBee
   devices.
