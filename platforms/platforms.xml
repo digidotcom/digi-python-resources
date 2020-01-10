@@ -1,0 +1,6 @@
+<platforms>
+    <platform id="IX14">
+        <icon>ix14.png</icon>
+        <name>XBee Gateway (IX14)</name>
+    </platform>
+</platforms>
