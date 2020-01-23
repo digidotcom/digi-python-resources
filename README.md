@@ -34,6 +34,10 @@ Organization
 
 The repository is structured in the following folders:
 
+* **categories** - This folder contains the definition and images for the Digi
+  categories in which the different products supporting Python are organized.
+  This information is used by the **Digi Python PyCharm Plugin** to filter the
+  supported platforms.
 * **lib** - The `lib/` directory contain Python modules that extend the
   standard API of your device. You can eiher import these libraries in your
   project using the **Digi Python PyCharm Plugin** or copy them manully inside

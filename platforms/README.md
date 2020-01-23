@@ -1,5 +1,5 @@
-Dig Python Platforms
-====================
+Digi Python Platforms
+=====================
 
 This folder contains the definition and images for the Digi products supporting
 Python. This information is used by the **Digi Python PyCharm Plugin** to list
