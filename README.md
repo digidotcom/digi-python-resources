@@ -38,16 +38,16 @@ The repository is structured in the following folders:
   categories in which the different products supporting Python are organized.
   This information is used by the **Digi Python PyCharm Plugin** to filter the
   supported platforms.
-* **lib** - The `lib/` directory contain Python modules that extend the
-  standard API of your device. You can eiher import these libraries in your
-  project using the **Digi Python PyCharm Plugin** or copy them manully inside
+* **lib** - The `lib/` directory contains Python modules that extend the
+  standard API of your device. You can either import these libraries in your
+  project using the **Digi Python PyCharm Plugin** or copy them manually inside
   your project structure.
 * **platforms** - This folder contains the definition and images for the
   Digi products supporting Python. This information is used by the **Digi
   Python PyCharm Plugin** to list the supported platforms.
 * **samples** - Files in the `samples/` directory are organized by feature.
   For example, `network` contains samples related to XBee networks and
-  `configuration` contains samples demontstrating how to configure XBee
+  `configuration` contains samples demonstrating how to configure XBee
   devices.
 * **typehints** - This folder contains the API definitions of the Python
   modules available in the Digi devices. These definitions are used by the
