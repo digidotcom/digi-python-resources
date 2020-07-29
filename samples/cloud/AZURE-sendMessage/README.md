@@ -31,11 +31,30 @@ Run
 
 Supported platforms
 -------------------
+* AnywhereUSBPlus
+* ConnectEZMini
+* ConnectEZ2
+* ConnectEZ4
+* ConnectEZ8
+* ConnectEZ1632
+* ConnectITMini
+* ConnectIT4
+* ConnectIT1648
+* EX12
+* EX15
+* EX50
+* IX10
 * IX15
+* IX20
+* IX30
+* LR54
+* TX54
+* TX64
+* TX64Rail
 
 License
 -------
-Copyright (c) 2020, Digi International, Inc.
+Copyright (c) 2020-2023, Digi International, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
