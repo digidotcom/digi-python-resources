@@ -1,9 +1,142 @@
 <platforms>
+    <platform id="AnywhereUSBPlus">
+        <icon>anywhere-usb.png</icon>
+        <name>Digi AnywhereUSB 2/8/24</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi AnywhereUSB( 2 Industrial|8|8W|24|24W) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002383/default.htm</documentation_url>
+    </platform>
+	<platform id="ConnectEZMini">
+        <icon>connect-ez-mini.png</icon>
+        <name>Digi Connect EZ Mini</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi Connect EZ Mini ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002409/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectEZ2">
+        <icon>connect-ez-2.png</icon>
+        <name>Digi Connect EZ 2</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi Connect EZ 2 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002458/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectEZ4">
+        <icon>connect-ez-4.png</icon>
+        <name>Digi Connect EZ 4</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi Connect EZ 4 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002459/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectEZ8">
+        <icon>connect-ez-8.png</icon>
+        <name>Digi Connect EZ 8</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi Connect EZ (8|8 IO|8 IOS|8 M|8 W) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/Digidocs/90002538/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectEZ1632">
+        <icon>connect-ez-32.png</icon>
+        <name>Digi Connect EZ 16/32</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi Connect EZ (16/16 MEI/32/32 MEI) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/Digidocs/90002540/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectITMini">
+        <icon>connect-it-mini.png</icon>
+        <name>Digi Connect IT Mini</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi ConnectIT-Mini ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002358/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectIT4">
+        <icon>connect-it-4.png</icon>
+        <name>Digi Connect IT 4</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi ConnectIT4 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002355/default.htm</documentation_url>
+    </platform>
+    <platform id="ConnectIT1648">
+        <icon>connect-it-48.png</icon>
+        <name>Digi Connect IT 16/48</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi ConnectIT(16|48) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002332/default.htm</documentation_url>
+    </platform>
+    <platform id="EX12">
+        <icon>ex12.png</icon>
+        <name>Digi EX12</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi EX12 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002364/default.htm</documentation_url>
+    </platform>
+    <platform id="EX15">
+        <icon>ex15.png</icon>
+        <name>Digi EX15/EX15W</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi EX15W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002344/default.htm</documentation_url>
+    </platform>
+    <platform id="EX50">
+        <icon>ex50.png</icon>
+        <name>Digi EX50</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi EX50 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002435/default.htm</documentation_url>
+    </platform>
+    <platform id="IX10">
+        <icon>ix10.png</icon>
+        <name>Digi IX10</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi IX10 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002291/default.htm</documentation_url>
+    </platform>
     <platform id="IX15">
         <icon>ix15.png</icon>
-        <name>IX15 XBee Gateway</name>
+        <name>Digi IX15 XBee Gateway</name>
         <category_id>xbee_gateway</category_id>
         <discovery_pattern>Digi IX15 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002400</documentation_url>
+    </platform>
+    <platform id="IX20">
+        <icon>ix20.png</icon>
+        <name>Digi IX20/IX20W</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi IX20W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002381/default.htm</documentation_url>
+    </platform>
+    <platform id="IX30">
+        <icon>ix30.png</icon>
+        <name>Digi IX30</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi IX30 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002452/default.htm</documentation_url>
+    </platform>
+    <platform id="LR54">
+        <icon>lr54.png</icon>
+        <name>Digi LR54/LR54W</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi LR54W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002386/default.htm</documentation_url>
+    </platform>	
+    <platform id="TX54">
+        <icon>tx54.png</icon>
+        <name>Digi TX54</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi TX54-(Dual-Cellular|Dual-Wi-Fi|Single-Cellular) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002357/default.htm</documentation_url>
+    </platform>
+	<platform id="TX64">
+        <icon>tx64.png</icon>
+        <name>Digi TX64</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi TX64 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002348/default.htm</documentation_url>
+    </platform>
+	<platform id="TX64Rail">
+        <icon>tx64r.png</icon>
+        <name>Digi TX64 Rail</name>
+        <category_id>cellular_router</category_id>
+        <discovery_pattern>Digi TX64-Rail-Single-Cellular ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002450/default.htm</documentation_url>
     </platform>
 </platforms>
