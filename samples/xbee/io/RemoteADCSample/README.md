@@ -74,7 +74,7 @@ Run
 
 Supported platforms
 -------------------
-* IX14
+* IX15
 
 License
 -------

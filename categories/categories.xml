@@ -1,7 +1,7 @@
 <categories>
-    <category id="gateway">
-        <name>XBee Gateway/router</name>
-        <description>XBee Gateways and Digi routers.</description>
+    <category id="xbee_gateway">
+        <name>XBee Gateways</name>
+        <description>XBee Gateways and routers.</description>
         <project_type>Python</project_type>
         <dest_path>/etc/config/scripts</dest_path>
         <icon>category_gateway.png</icon>

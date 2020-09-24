@@ -1,9 +1,9 @@
 <platforms>
-    <platform id="IX14">
-        <icon>ix14.png</icon>
-        <name>XBee Gateway (IX14)</name>
-        <category_id>gateway</category_id>
-        <discovery_pattern>IX14 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
+    <platform id="IX15">
+        <icon>ix15.png</icon>
+        <name>XBee Gateway</name>
+        <category_id>xbee_gateway</category_id>
+        <discovery_pattern>Digi IX15 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002291</documentation_url>
     </platform>
 </platforms>

@@ -117,7 +117,7 @@ Supported platforms
 > 
 > Example:
    
-* IX14
+* IX15
 
 License
 -------

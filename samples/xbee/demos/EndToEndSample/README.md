@@ -90,7 +90,7 @@ To verify the application is working properly, check the following:
 
 Supported platforms
 -------------------
-* IX14
+* IX15
 
 License
 -------
