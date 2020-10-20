@@ -156,6 +156,8 @@ XBEE_TEXT_PROPERTIES = [
     PROP_ALTITUDE
 ]
 
+DATA_SEPARATOR = "@@"
+
 # Variables.
 device = None
 
@@ -249,7 +251,7 @@ def drm_request_callback(target, request):
         set_tank_valve(data == "1")
     elif target == DRM_TARGET_SET_STATION_VALVE:
         data, dest_addr = get_data_address(request)
-        set_station_valve(data == "1", dest_addr)
+        return set_station_valve(data == "1", dest_addr)
     elif target == DRM_TARGET_SET_SAMPLING_RATE:
         report_interval = int(data)
         print_log("Report interval changed to {} seconds".format(report_interval))
@@ -347,8 +349,9 @@ def get_data_address(request):
     """
     # Check if the request is for a specific station or for all.
     if len(request) >= MIN_DRM_REQUEST_ADDR_SIZE:
-        dest_addr = request[0:MIN_DRM_REQUEST_ADDR_SIZE]
-        data = request[MIN_DRM_REQUEST_ADDR_SIZE:len(request)]
+        data_values = request.split(DATA_SEPARATOR)
+        dest_addr = data_values[0].strip()
+        data = data_values[1].strip()
         return data, dest_addr
     return request, None
 
@@ -571,6 +574,8 @@ def set_station_valve(is_open, dest_addr=None):
     if send_status_request([(STAT_VALVE, int(is_open))], dest_addr):
         print_log("Station valve is now {} ({})".format("open" if is_open else "closed",
                                                         dest_addr if dest_addr is not None else "ALL"))
+        return AT_VALUE_ENABLED if is_open else AT_VALUE_DISABLED
+    return ""
 
 
 def any_open_valve():
@@ -609,6 +614,9 @@ def load_irrigation_schedule():
     global irrigation_schedule
 
     # Read and parse the properties file.
+    if not os.path.exists(FILE_PROPERTIES):
+        return
+
     f = open(FILE_PROPERTIES)
     try:
         data = json.loads(f.read())
