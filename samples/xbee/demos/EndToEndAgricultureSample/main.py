@@ -107,7 +107,7 @@ RADIATION_DELTA = 10  # 10 W/m2
 DEFAULT_RAIN = 0                # 0 mm
 DEFAULT_WIND = 5                # 5 km/h
 DEFAULT_RADIATION = 350         # 350 W/m2
-DEFAULT_TANK_LEVEL = 100        # 100 %
+DEFAULT_TANK_LEVEL = 50         # 50 %
 DEFAULT_VALVE_POSITION = False  # Closed
 DEFAULT_IRR_DURATION = 600      # 10 minutes
 DEFAULT_REPORT_INTERVAL = 60    # 1 minute
@@ -241,7 +241,7 @@ def drm_request_callback(target, request):
     """
     global report_interval, weather_condition, time_factor, tank_level
 
-    data = request
+    data = request.strip()
 
     # Execute the corresponding action based on the target.
     if target == DRM_TARGET_SET_AUTO_IRRIGATION:
