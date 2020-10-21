@@ -248,7 +248,7 @@ def drm_request_callback(target, request):
         data, dest_addr = get_data_address(request)
         set_auto_irrigation(data == "1", dest_addr)
     elif target == DRM_TARGET_SET_TANK_VALVE:
-        set_tank_valve(data == "1")
+        return set_tank_valve(data == "1")
     elif target == DRM_TARGET_SET_STATION_VALVE:
         data, dest_addr = get_data_address(request)
         return set_station_valve(data == "1", dest_addr)
@@ -271,8 +271,7 @@ def drm_request_callback(target, request):
     elif target == DRM_TARGET_SET_SCHEDULE:
         set_irrigation_schedule(data)
     elif target == DRM_TARGET_REFILL_TANK:
-        tank_level = 100
-        print_log("Tank refilled")
+        return refill_tank()
     elif target == DRM_TARGET_IS_MAIN_CONTROLLER:
         return is_main_controller()
 
@@ -545,11 +544,19 @@ def set_tank_valve(is_open):
 
     Args:
         is_open (Boolean): ``True`` to open the valve, ``False`` to close it.
+
+    Returns:
+        The new position of the tank valve.
     """
     global tank_valve_open
 
     tank_valve_open = is_open
+
+    # Upload a datapoint with the new position.
+    Thread(target=upload_configuration_drm, args=((STAT_VALVE, int(is_open)),), daemon=True).start()
+
     print_log("Tank valve is now {}".format("open" if tank_valve_open else "closed"))
+    return AT_VALUE_ENABLED if is_open else AT_VALUE_DISABLED
 
 
 def set_station_valve(is_open, dest_addr=None):
@@ -562,6 +569,9 @@ def set_station_valve(is_open, dest_addr=None):
         dest_addr (String, optional): the 64-bit address of the station to
             set the valve position. If none is specified, it applies to all
             stations.
+
+    Returns:
+        The new position of the station valve.
     """
     # Update the valve position in the dictionary.
     if dest_addr is not None:
@@ -674,6 +684,24 @@ def set_irrigation_schedule(schedule):
     irrigation_schedule = data[PROP_SCHEDULE]
 
     print_log("Changed the irrigation schedule: {}".format(irrigation_schedule))
+
+
+def refill_tank():
+    """
+    Refills the tank to 100%.
+
+    Returns:
+        The new tank level.
+    """
+    global tank_level
+
+    tank_level = 100
+
+    # Upload a datapoint with the new level.
+    Thread(target=upload_configuration_drm, args=((STAT_LEVEL, tank_level),), daemon=True).start()
+
+    print_log("Tank refilled")
+    return tank_level
 
 
 def send_status_request(props, dest_addr=None):
