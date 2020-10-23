@@ -817,7 +817,11 @@ def upload_configuration_drm(configuration, sender=None):
     # Generate the corresponding data stream.
     data_stream = DATA_STREAM_FORMAT.format(sender, conf_id) if sender is not None else conf_id
     # Upload the measurement as a new data point of the data stream.
-    datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
+    try:
+        datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
+    except Exception as e:
+        print(e)
+        traceback.print_exc()
 
 
 def get_next_random(value, max_value, min_value, max_delta):
