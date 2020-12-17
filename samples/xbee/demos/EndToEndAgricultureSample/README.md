@@ -32,7 +32,7 @@ The example performs the following actions:
 * Listen for requests coming from Digi Remote Manager and distribute them to
   the corresponding irrigation stations.
 
-Read the demo documentation for more information.
+Read the [demo documentation][doc] for more information.
 
 Requirements
 ------------
@@ -83,3 +83,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+[doc]: https://www.digi.com/resources/documentation/digidocs/90002422
