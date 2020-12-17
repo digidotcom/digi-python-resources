@@ -6,7 +6,7 @@ to benefit from the methods and abstractions they offer. Libraries are
 organized in categories, which are directories that group them by feature or
 functionality.
 
-**Digi Python PyCharm Plugin** uses this folder to list and import libraries
+**Digi XBee PyCharm IDE plugin** uses this folder to list and import libraries
 when creating a new project.
 
 Contributing

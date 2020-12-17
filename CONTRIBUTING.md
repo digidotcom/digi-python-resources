@@ -105,7 +105,7 @@ there is not already a category that meets your needs.
     corresponding copyright in the header of the source file.
 
 
-[doc]: https://www.digi.com/resources/documentation/digidocs/90002291/default.htm#containers/applications-cont.htm
+[doc]: https://www.digi.com/resources/documentation/digidocs/90002400/#containers/applications-cont.htm
 [forum]: http://www.digi.com/support/forum
 [issues]: http://github.com/digidotcom/digi-python-resources/issues
 [digi-python-resources]: http://github.com/digidotcom/digi-python-resources
