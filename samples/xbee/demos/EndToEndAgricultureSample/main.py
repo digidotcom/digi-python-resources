@@ -1,4 +1,4 @@
-# Copyright (c) 2020, Digi International, Inc.
+# Copyright (c) 2020, 2021, Digi International, Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,12 @@
 import json
 import os
 import random
+import signal
 import time
 import traceback
 from datetime import datetime
 from json import JSONDecodeError
-from threading import Thread, Timer
+from threading import Thread, Timer, Event
 
 from digi.xbee.devices import RemoteXBeeDevice
 from digi.xbee.exception import XBeeException
@@ -181,6 +182,8 @@ station_moisture_dict = dict()
 
 irrigation_schedule = []
 
+event = Event()
+
 
 def bluetooth_data_callback(data):
     """
@@ -333,6 +336,18 @@ def xbee_packet_callback(packet):
         # If the sender is not in the auto-irrigation dictionary, add it with the default value.
         if sender not in auto_irrigation_dict:
             auto_irrigation_dict[sender] = auto_irrigation
+
+
+def signal_handler(signal_number, _frame):
+    """
+    Signal handler function.
+
+    Args:
+        signal_number (Integer): Received signal.
+        _frame: Current stack frame.
+    """
+    if signal_number in (signal.SIGTERM, signal.SIGINT, signal.SIGQUIT):
+        event.set()
 
 
 def get_data_address(request):
@@ -1090,9 +1105,14 @@ def main():
     print(" +-----------------------------------+\n")
 
     global device, current_time
-    device = xbee.get_device()
 
-    # Open the connection with the XBee device.
+    # Register callbacks for signals processing.
+    signal.signal(signal.SIGTERM, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGQUIT, signal_handler)
+
+    # Get the XBee device and open the connection.
+    device = xbee.get_device()
     device.open()
     device.set_api_output_mode(APIOutputMode.EXPLICIT)
 
@@ -1126,7 +1146,7 @@ def main():
     if is_main_controller():
         drm_report_task()
 
-    input()
+    event.wait()
 
 
 if __name__ == '__main__':
