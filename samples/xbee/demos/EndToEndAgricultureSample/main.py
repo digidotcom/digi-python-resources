@@ -34,7 +34,7 @@ from digi.xbee.models.address import XBee64BitAddress
 from digi.xbee.models.mode import APIOutputMode
 from digi.xbee.packets.aft import ApiFrameType
 from digi.xbee.util import utils
-from digidevice import datapoint, device_request, runt, xbee
+from digidevice import config, datapoint, device_request, runt, xbee
 
 # Constants.
 DRM_TARGET_SET_AUTO_IRRIGATION = "set_auto_irrigation"
@@ -478,8 +478,9 @@ def finish_provisioning():
     Finishes the provisioning phase by disabling the Bluetooth interface.
     """
     # Disable the Bluetooth interface.
-    device.set_parameter(AT_CMD_BT, utils.hex_string_to_bytes("0"))
-    write_xbee_settings()
+    cfg = config.load(writable=True)
+    cfg.set("bluetooth.enable", False)
+    cfg.commit()
 
 
 def set_auto_irrigation(irrigate, dest_addr=None):
