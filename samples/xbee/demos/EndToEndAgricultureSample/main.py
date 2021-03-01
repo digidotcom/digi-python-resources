@@ -22,6 +22,7 @@ import json
 import os
 import random
 import signal
+import sys
 import time
 import traceback
 from datetime import datetime
@@ -838,8 +839,7 @@ def upload_configuration_drm(configuration, sender=None):
         with datapoint_lock:
             datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
     except Exception as e:
-        print(e)
-        traceback.print_exc()
+        print("Could not upload datapoint to stream '{}': {}".format(data_stream, str(e)), file=sys.stderr)
 
 
 def get_next_random(value, max_value, min_value, max_delta):
