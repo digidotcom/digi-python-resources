@@ -26,7 +26,7 @@ import time
 import traceback
 from datetime import datetime
 from json import JSONDecodeError
-from threading import Thread, Timer, Event
+from threading import Thread, Timer, Event, Lock
 
 from digi.xbee.devices import RemoteXBeeDevice
 from digi.xbee.exception import XBeeException
@@ -182,6 +182,8 @@ station_moisture_dict = dict()
 irrigation_schedule = []
 
 event = Event()
+
+datapoint_lock = Lock()
 
 
 def bluetooth_data_callback(data):
@@ -833,7 +835,8 @@ def upload_configuration_drm(configuration, sender=None):
     data_stream = DATA_STREAM_FORMAT.format(sender, conf_id) if sender is not None else conf_id
     # Upload the measurement as a new data point of the data stream.
     try:
-        datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
+        with datapoint_lock:
+            datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
     except Exception as e:
         print(e)
         traceback.print_exc()
