@@ -24,7 +24,6 @@ import random
 import signal
 import sys
 import time
-import traceback
 from datetime import datetime
 from json import JSONDecodeError
 from threading import Thread, Timer, Event, Lock
@@ -410,8 +409,7 @@ def save_properties(properties):
 
         return True
     except Exception as e:
-        print(e)
-        traceback.print_exc()
+        print_error("Could not save properties in the XBee firmware: {}".format(str(e)))
 
     return False
 
@@ -769,8 +767,8 @@ def send_data_xbee(data, dest_addr=None):
         else:
             device.send_data(RemoteXBeeDevice(device, XBee64BitAddress.from_hex_string(dest_addr)), data)
         return True
-    except XBeeException:
-        traceback.print_exc()
+    except XBeeException as e:
+        print_error("Could not send data: {}".format(str(e)))
 
     return False
 
@@ -840,7 +838,7 @@ def upload_configuration_drm(configuration, sender=None):
         with datapoint_lock:
             datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
     except Exception as e:
-        print("Could not upload datapoint to stream '{}': {}".format(data_stream, str(e)), file=sys.stderr)
+        print_error("Could not upload datapoint to stream '{}': {}".format(data_stream, str(e)))
 
 
 def get_next_random(value, max_value, min_value, max_delta):
@@ -955,6 +953,16 @@ def print_log(msg):
         msg (string): log message to print.
     """
     print("[{}] {}".format(datetime.now(), msg))
+
+
+def print_error(msg):
+    """
+    Prints the given error message.
+
+    Args:
+        msg (string): error message to print.
+    """
+    print("[{}] {}".format(datetime.now(), msg), file=sys.stderr)
 
 
 def is_connected_drm():
