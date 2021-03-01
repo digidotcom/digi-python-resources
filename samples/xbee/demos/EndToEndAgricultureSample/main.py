@@ -294,15 +294,15 @@ def xbee_data_callback(msg):
     """
     sender = str(msg.remote_device.get_64bit_addr())
 
-    # If the sender is not in the auto-irrigation dictionary, add it with the default value.
-    if sender not in auto_irrigation_dict:
-        auto_irrigation_dict[sender] = auto_irrigation
-
     # Parse the received JSON.
     try:
         json_items = json.loads(msg.data.decode())
     except (JSONDecodeError, UnicodeDecodeError):
         return
+
+    # If the sender is not in the auto-irrigation dictionary, add it with the default value.
+    if sender not in auto_irrigation_dict:
+        auto_irrigation_dict[sender] = auto_irrigation
 
     if msg.is_broadcast or json_items[ITEM_OP] != OP_STATUS:
         return
