@@ -31,7 +31,6 @@ from threading import Thread, Timer, Event
 from digi.xbee.devices import RemoteXBeeDevice
 from digi.xbee.exception import XBeeException
 from digi.xbee.models.address import XBee64BitAddress
-from digi.xbee.models.mode import APIOutputMode
 from digi.xbee.packets.aft import ApiFrameType
 from digi.xbee.util import utils
 from digidevice import config, datapoint, device_request, runt, xbee
@@ -1115,7 +1114,6 @@ def main():
     # Get the XBee device and open the connection.
     device = xbee.get_device()
     device.open()
-    device.set_api_output_mode(APIOutputMode.EXPLICIT)
 
     # Register a callback to handle incoming data from the Bluetooth interface.
     device.add_bluetooth_data_received_callback(bluetooth_data_callback)
