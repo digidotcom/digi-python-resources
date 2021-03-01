@@ -537,12 +537,13 @@ def start_irrigation(duration=DEFAULT_IRR_DURATION):
             # Open the station valve.
             set_station_valve(True, dev)
             # Wait during the configured time.
-            for i in range(0, int(duration / time_factor)):
+            start_time = current_time
+            while current_time < start_time + duration:
                 # If the tank is empty, do not continue.
                 if tank_level == 0:
                     print_log("WARNING: irrigation process stopped, the tank is empty")
                     break
-                time.sleep(1)
+                time.sleep(0.5)
             # Close the station valve.
             set_station_valve(False, dev)
             # If the tank is empty, do not continue.
