@@ -10,7 +10,7 @@ the device:
 
 Check help(datapoint.upload) for more details and parameters.
 """
-# Copyright 2020, Digi International Inc.
+# Copyright 2020-2021, Digi International Inc.
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -77,6 +77,51 @@ class DataPointException(RuntimeError):
         """
         ...
 
+class DataPoint:
+    """
+    Class representing a single data point. Used to upload multiple data points
+    to the server at once.
+    The stream_id and data parameters are required. Data is always uploaded in
+    its string form and converted as appropriate by the server.
+    """
+    def __init__(
+            self, stream_id: str, data, *, description: str = None,
+            timestamp: float = None, units: str = None,
+            geo_location: Tuple[float, float, float] = None,
+            quality: int = None, data_type: DataType = None
+            ) -> None:
+        """
+        Class constructor. Instantiates a new ``DataPoint`` object with the
+        provided parameters.
+
+        :param stream_id: The name of the stream. Will automatically have the
+            Device ID prepended to it by the server.
+        :param data: A python object representing the data point data. For most
+            data types, it is converted to string using its __str__() method
+            before uploading. For GEOJSON, a non-string python object may be
+            passed and it is converted later using json.dumps().
+        :param description: Optional: The description of the data point.
+        :param timestamp: Optional: A datetime object or float timestamp (as
+            returned by time.time()) describing the local time the data point
+            was recorded. If unset, it is automatically set by the client at the
+            time of send. Local system timezone information is added to the
+            timestamp unless it is specified as a datetime object.
+        :param units: Optional: Units in free form text. Changes the current
+            units recorded in the stream associated with the data point.
+        :param geo_location: Optional: A sequence of 2 or 3 float values
+            describing the latitude, longitude and elevation (optional)
+            associated with the data point.
+        :param quality: Optional: an integer describing the quality associated
+            with the data point.
+        :param data_type: Optional: The DataType enum constant indicating what
+            data type should be used for the stream associated with the data
+            point.
+
+        :raises ValueError if the data stream is invalid or there is no data.
+        :raises TypeError if the data point value does not match the data point
+            type
+        """
+        ...
 
 def upload(stream_id: str, data: Any, *, description: Optional[str] = None,
            timestamp: Optional[float] = None, units: Optional[str] = None,
@@ -126,5 +171,22 @@ def upload(stream_id: str, data: Any, *, description: Optional[str] = None,
         bytes-like object, or if the data_type parameter is not a DataType enum.
     :raises ValueError if the value of a parameter doesn't match the expected
         one.
+    """
+    ...
+
+def upload_multiple(datapoints: List[DataPoint], timeout: float = None):
+    """
+    Upload multiple data points to the server.
+    Because the data point is sent to the server and communication can fail at
+    any time, it's possible for this request to fail, but the data point to
+    still be successfully uploaded.
+
+    :param datapoints: A list of ``DataPoint`` to upload.
+    :param timeout: Optional: The timeout in seconds before the client reports
+        an error.
+
+    :raises DataPointException for server or transport problems.
+    :raises TimeoutError if the request times out.
+    :raises ValueError if the list does not contain ``DataPoint`` objects.
     """
     ...
