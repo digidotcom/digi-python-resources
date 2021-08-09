@@ -19,7 +19,8 @@
 # SOFTWARE.
 
 from collections import defaultdict
-from digidevice import datapoint, device_request, xbee
+from digidevice import datapoint, device_request, runt, xbee
+from digidevice.datapoint import DataType
 
 MSG_SEPARATOR = "@@@"
 MSG_AWAKE = "AWAKE"
@@ -27,6 +28,11 @@ MSG_AWAKE = "AWAKE"
 DEVICE_REQUEST_TARGET = "tempHum"
 DATA_STREAM_TEMP = "%s/temperature"
 DATA_STREAM_HUM = "%s/humidity"
+
+PROP_FW_VERSION = "firmware.version"
+
+OLD_FW_YEAR = 21
+OLD_FW_MONTH = 8
 
 
 def main():
@@ -58,10 +64,20 @@ def main():
 
         # Upload the temperature and humidity values to Digi Remote Manager.
         try:
-            datapoint.upload(DATA_STREAM_TEMP % src_addr, data_split[0], units="C",
-                             data_type=datapoint.DataType.DOUBLE)
-            datapoint.upload(DATA_STREAM_HUM % src_addr, data_split[1], units="%",
-                             data_type=datapoint.DataType.DOUBLE)
+            if is_old_firmware():
+                datapoint.upload(DATA_STREAM_TEMP % src_addr, data_split[0],
+                                 units="C", data_type=DataType.DOUBLE)
+                datapoint.upload(DATA_STREAM_HUM % src_addr, data_split[1],
+                                 units="%", data_type=DataType.DOUBLE)
+            else:
+                from digidevice.datapoint import DataPoint
+                # Create the data points collection.
+                data_points = [DataPoint(DATA_STREAM_TEMP % src_addr, data_split[0],
+                                   units="C", data_type=DataType.DOUBLE),
+                               DataPoint(DATA_STREAM_HUM % src_addr, data_split[1],
+                                   units="%", data_type=DataType.DOUBLE)]
+                # Upload the data points all at once.
+                datapoint.upload_multiple(data_points)
         except Exception as e:
             print(e)
 
@@ -96,6 +112,31 @@ def main():
         # Close the connection with the device.
         if device.is_open():
             device.close()
+
+
+def is_old_firmware():
+    """
+    Returns whether the firmware running is an old version or not in
+    terms of data point upload capabilities.
+
+    Returns:
+        Boolean: ``True`` if the device firmware is old, ``False`` otherwise.
+    """
+    # Read firmware version from runt.
+    runt.start()
+    fw_version = runt.get(PROP_FW_VERSION)
+    runt.stop()
+
+    # Compare firmware year and month with old versions.
+    year = int(fw_version.split(".")[0])
+    month = int(fw_version.split(".")[1])
+    if year < OLD_FW_YEAR:
+        return True
+    if year == OLD_FW_YEAR:
+        if month < OLD_FW_MONTH:
+            return True
+
+    return False
 
 
 if __name__ == '__main__':
