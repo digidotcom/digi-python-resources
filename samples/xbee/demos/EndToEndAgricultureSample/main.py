@@ -34,6 +34,7 @@ from digi.xbee.models.address import XBee64BitAddress
 from digi.xbee.packets.aft import ApiFrameType
 from digi.xbee.util import utils
 from digidevice import config, datapoint, device_request, runt, xbee
+from digidevice.datapoint import DataType
 
 # Constants.
 DRM_TARGET_SET_AUTO_IRRIGATION = "set_auto_irrigation"
@@ -157,6 +158,11 @@ XBEE_TEXT_PROPERTIES = [
 ]
 
 DATA_SEPARATOR = "@@"
+
+PROP_FW_VERSION = "firmware.version"
+
+OLD_FW_YEAR = 21
+OLD_FW_MONTH = 8
 
 # Variables.
 device = None
@@ -317,9 +323,7 @@ def xbee_data_callback(msg):
         station_moisture_dict[sender] = float(properties[STAT_MOISTURE])
 
     # Parse the configurations contained in the message and upload them to DRM.
-    configurations = parse_configurations(properties)
-    for configuration in configurations:
-        upload_configuration_drm(configuration, sender)
+    upload_configurations_drm(parse_configurations(properties), sender)
 
 
 def xbee_packet_callback(packet):
@@ -570,7 +574,7 @@ def set_tank_valve(is_open):
     tank_valve_open = is_open
 
     # Upload a datapoint with the new position.
-    Thread(target=upload_configuration_drm, args=((STAT_VALVE, int(is_open)),), daemon=True).start()
+    Thread(target=upload_configurations_drm, args=([(STAT_VALVE, int(is_open))],), daemon=True).start()
 
     print_log("Tank valve is now {}".format("open" if tank_valve_open else "closed"))
     return AT_VALUE_ENABLED if is_open else AT_VALUE_DISABLED
@@ -715,7 +719,7 @@ def refill_tank():
     tank_level = 100
 
     # Upload a datapoint with the new level.
-    Thread(target=upload_configuration_drm, args=((STAT_LEVEL, tank_level),), daemon=True).start()
+    Thread(target=upload_configurations_drm, args=([(STAT_LEVEL, tank_level)],), daemon=True).start()
 
     print_log("Tank refilled")
     return tank_level
@@ -818,27 +822,48 @@ def parse_configurations(payload):
     return configurations
 
 
-def upload_configuration_drm(configuration, sender=None):
+def upload_configurations_drm(configurations, sender=None):
     """
-    Uploads the given configuration to Digi Remote Manager.
+    Uploads the given configurations to Digi Remote Manager.
 
     Args:
-        configuration (tuple): the configuration to upload to DRM.
+        configurations (list of tuple): the configurations to upload to DRM.
         sender (String, optional): the 64-bit address of the solar panel that
             originated the configuration. Use ``None`` if the configuration is
             from the solar controller.
     """
-    conf_id = configuration[0]
-    conf_value = configuration[1]
+    # Check if multiple data point upload can be used
+    if is_old_firmware():
+        for config in configurations:
+            conf_id = config[0]
+            conf_value = config[1]
 
-    # Generate the corresponding data stream.
-    data_stream = DATA_STREAM_FORMAT.format(sender, conf_id) if sender is not None else conf_id
-    # Upload the measurement as a new data point of the data stream.
-    try:
-        with datapoint_lock:
-            datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
-    except Exception as e:
-        print_error("Could not upload datapoint to stream '{}': {}".format(data_stream, str(e)))
+            # Generate the corresponding data stream.
+            data_stream = DATA_STREAM_FORMAT.format(sender, conf_id) if sender is not None else conf_id
+            # Upload the measurement as a new data point of the data stream.
+            try:
+                with datapoint_lock:
+                    datapoint.upload(data_stream, conf_value, data_type=datapoint.DataType.DOUBLE)
+            except Exception as e:
+                print_error("Could not upload datapoint to stream '{}': {}".format(data_stream, str(e)))
+    else:
+        from digidevice.datapoint import DataPoint
+        data_points = []
+        for config in configurations:
+            conf_id = config[0]
+            conf_value = config[1]
+
+            # Generate the corresponding data stream.
+            data_stream = DATA_STREAM_FORMAT.format(sender, conf_id) if sender is not None else conf_id
+            # Create and store the data point.
+            data_points.append(DataPoint(data_stream, conf_value, data_type=DataType.DOUBLE))
+
+            # Upload the data points all at once.
+            try:
+                with datapoint_lock:
+                    datapoint.upload_multiple(data_points)
+            except Exception as e:
+                print_error("Could not upload datapoints: {}".format(str(e)))
 
 
 def get_next_random(value, max_value, min_value, max_delta):
@@ -1043,8 +1068,7 @@ def drm_report_task():
     configurations.append((STAT_LEVEL, tank_level_f))
     configurations.append((STAT_VALVE, int(tank_valve_open)))
 
-    for configuration in configurations:
-        upload_configuration_drm(configuration)
+    upload_configurations_drm(configurations)
 
     # Create and start a timer to repeat this task periodically.
     t = Timer(report_interval, drm_report_task)
@@ -1105,6 +1129,29 @@ def time_task():
 
         # Sleep the appropriate time so that this task is repeated exactly every 1 second.
         time.sleep(1.0 - (time.time() - start_time))
+
+
+def is_old_firmware():
+    """
+    Returns whether the firmware running is an old version or not in
+    terms of data point upload capabilities.
+
+    Returns:
+        Boolean: ``True`` if the device firmware is old, ``False`` otherwise.
+    """
+    # Read firmware version from runt.
+    fw_version = get_runt(PROP_FW_VERSION)
+
+    # Compare firmware year and month with old versions.
+    year = int(fw_version.split(".")[0])
+    month = int(fw_version.split(".")[1])
+    if year < OLD_FW_YEAR:
+        return True
+    if year == OLD_FW_YEAR:
+        if month < OLD_FW_MONTH:
+            return True
+
+    return False
 
 
 def main():
