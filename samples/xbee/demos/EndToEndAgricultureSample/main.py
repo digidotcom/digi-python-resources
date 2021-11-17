@@ -509,9 +509,10 @@ def finish_provisioning():
     Finishes the provisioning phase by disabling the Bluetooth interface.
     """
     # Disable the Bluetooth interface.
-    cfg = config.load(writable=True)
-    cfg.set("bluetooth.enable", False)
-    cfg.commit()
+    # cfg = config.load(writable=True)
+    # cfg.set("bluetooth.enable", False)
+    # cfg.commit()
+    return
 
 
 def set_auto_irrigation(irrigate, dest_addr=None):
