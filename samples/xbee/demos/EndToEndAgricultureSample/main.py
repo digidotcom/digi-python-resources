@@ -82,6 +82,7 @@ STAT_PRESSURE = "pressure"
 STAT_LUMINOSITY = "luminosity"
 STAT_BATTERY = "battery"
 STAT_RAIN = "rain"
+STAT_RAIN_DIFF = "rain_diff"
 STAT_WIND = "wind_speed"
 STAT_WIND_DIR = "wind_direction"
 STAT_RADIATION = "radiation"
@@ -110,17 +111,17 @@ WIND_DELTA = 2  # 2 km/h
 RADIATION_DELTA = 10  # 10 W/m2
 
 DEFAULT_TEMP = 23               # 23 ºC
-DEFAULT_MOIST = 50                # 50 %
+DEFAULT_MOIST = 50              # 50 %
 DEFAULT_PRES = 25               # 27 hPa
 DEFAULT_RAIN = 0                # 0 mm
 DEFAULT_WIND = 5                # 5 km/h
 DEFAULT_WIND_DIR = "N"          # N (North)
-DEFAULT_LUM = 50         # 50 %
+DEFAULT_LUM = 50                # 50 %
 DEFAULT_RADIATION = 350         # 350 W/m2
 DEFAULT_TANK_LEVEL = 50         # 50 %
 DEFAULT_VALVE_POSITION = False  # Closed
 DEFAULT_IRR_DURATION = 600      # 10 minutes
-DEFAULT_REPORT_INTERVAL = 60    # 1 minute
+DEFAULT_REPORT_INTERVAL = 12    # 12 seconds
 
 TANK_DRAIN_RATE = 0.001  # 0.001 % / second
 
@@ -175,6 +176,7 @@ OLD_FW_MONTH = 8
 # Variables.
 device = None
 
+is_first_data_correct = False
 start_sending_data = False
 
 current_time = 0
@@ -185,6 +187,7 @@ temp = DEFAULT_TEMP
 moist = DEFAULT_MOIST
 pres = DEFAULT_PRES
 rain = DEFAULT_RAIN
+rain_previous = 0
 wind = DEFAULT_WIND
 wind_dir = DEFAULT_WIND_DIR
 luminosity = DEFAULT_LUM
@@ -948,7 +951,7 @@ def get_rain(simulation=False):
     the current weather condition.
 
     Returns:
-        The rain in mm.
+        The rain in L/m2.
     """
     rain_var = 0
 
@@ -1139,6 +1142,7 @@ def drm_report_task():
     Timer task to send the sensors report to Digi Remote Manager.
     """
     configurations = list()
+    global rain_acc, rain_previous
 
     if start_sending_data:
 
@@ -1155,8 +1159,21 @@ def drm_report_task():
         print_log("  - Pres: {} hPa".format(pres_calc))
 
         rain_calc = get_rain()
-        rain_f = "{:.2f}".format(rain_calc)
-        print_log("  - Rain: {} mm".format(rain_f))
+        rain_f = "{:.3f}".format(rain_calc)
+        print_log("  - Rain: {} L/m2".format(rain_f))
+
+        # This is the difference between the rain recently calculated and the previous sample
+        # It is used for knowing the current rain data, while maintaining also the accumulated data
+        rain_diff = rain_calc - rain_previous
+        rain_diff_f = "{:.3f}".format(rain_diff)
+        print_log("  - Rain difference: {} L/m2".format(rain_diff_f))
+
+        # Here we assign the new sample to be the "previous" for the next sample
+        rain_previous = rain_calc
+
+        # rain_acc = rain_acc + rain_calc
+        # rain_acc_f = "{:.5f}".format(rain_acc)
+        # print_log("  - Rain accumulated: {} L".format(rain_acc_f))
 
         wind_calc = get_wind()
         print_log("  - Wind: {} km/h".format(wind_calc))
@@ -1199,6 +1216,7 @@ def drm_report_task():
         configurations.append((STAT_MOISTURE, moist_calc))
         configurations.append((STAT_PRESSURE, pres_calc))
         configurations.append((STAT_RAIN, rain_f))
+        configurations.append((STAT_RAIN_DIFF, rain_diff_f))
         configurations.append((STAT_WIND, wind_calc))
         configurations.append((STAT_WIND_DIR, wind_dir_degrees))
         configurations.append((STAT_LUMINOSITY, luminosity_f))
@@ -1240,14 +1258,31 @@ def time_task():
       - Update the tank level based on the position of the valves.
       - Start the irrigation process.
     """
-    global current_time, rain, tank_level
+    global current_time, rain, rain_previous, tank_level
 
     while True:
         start_time = time.time()
 
         # Reset the rain at midnight.
         if (current_time + time_factor) // SECONDS_PER_DAY > 0:
+            # Create and configure the serial port settings
+            ser = serial.Serial()
+            ser.baudrate = BAUD_RATE
+            ser.port = PORT
+            ser.stopbits = STOP_BITS
+            ser.bytesize = N_DATA_BITS
+            ser.parity = PARITY
+            ser.rtscts = RTS_CTS
+            data = "reset"
+
+            # Open the serial port
+            ser.open()
+            # Send data thought the serial port
+            ser.write(data.encode())
+            ser.close()
+
             rain = 0
+            rain_previous = 0
 
         # Update the tank level based on the tank & station valves.
         if tank_valve_open and any_open_valve():
@@ -1308,6 +1343,10 @@ def microbit_data(data):
     except JSONDecodeError:
         return
 
+    global is_first_data_correct
+    is_first_data_correct = True
+
+    print(data.decode())
     global temp, moist, pres, rain, wind, wind_dir, luminosity
 
     temp = meas_items["temp"]
@@ -1344,13 +1383,13 @@ def read_microbit():
 
     # Open the serial port
     ser.open()
-
     try:
         while True:
             if ser.in_waiting:
                 data = ser.read(ser.in_waiting)
                 microbit_data(data)
-                start_sending_data = True
+                if is_first_data_correct:
+                    start_sending_data = True
             time.sleep(1)
 
     except KeyboardInterrupt:
@@ -1382,10 +1421,8 @@ def main():
 
     # Register a callback to handle incoming data from the Bluetooth interface.
     device.add_bluetooth_data_received_callback(bluetooth_data_callback)
-
     # Wait until the controller is connect to Digi Remote Manager.
     wait_drm_connection()
-
     # Register callbacks to handle incoming data from Digi Remote Manager.
     register_drm_targets()
 
@@ -1397,7 +1434,6 @@ def main():
 
     # Load the irrigation schedule from the properties file.
     load_irrigation_schedule()
-
     # Reads the values from the microbit application connected to the meteo station
     # and sets this data to be sent to DRM
     Thread(target=read_microbit, daemon=True).start()
@@ -1423,4 +1459,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
