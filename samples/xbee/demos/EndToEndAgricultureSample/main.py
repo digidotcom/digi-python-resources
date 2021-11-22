@@ -81,7 +81,7 @@ STAT_MOISTURE = "moisture"
 STAT_PRESSURE = "pressure"
 STAT_LUMINOSITY = "luminosity"
 STAT_BATTERY = "battery"
-STAT_RAIN = "rain"
+STAT_RAIN = "rain_acc"
 STAT_RAIN_DIFF = "rain_diff"
 STAT_WIND = "wind_speed"
 STAT_WIND_DIR = "wind_direction"
@@ -888,12 +888,12 @@ def upload_configurations_drm(configurations, sender=None):
             # Create and store the data point.
             data_points.append(DataPoint(data_stream, conf_value, data_type=DataType.DOUBLE))
 
-            # Upload the data points all at once.
-            try:
-                with datapoint_lock:
-                    datapoint.upload_multiple(data_points)
-            except Exception as e:
-                print_error("Could not upload datapoints: {}".format(str(e)))
+        # Upload the data points all at once.
+        try:
+            with datapoint_lock:
+                datapoint.upload_multiple(data_points)
+        except Exception as e:
+            print_error("Could not upload datapoints: {}".format(str(e)))
 
 
 def get_next_random(value, max_value, min_value, max_delta):
@@ -1142,7 +1142,7 @@ def drm_report_task():
     Timer task to send the sensors report to Digi Remote Manager.
     """
     configurations = list()
-    global rain_acc, rain_previous
+    global rain_previous
 
     if start_sending_data:
 
@@ -1170,10 +1170,6 @@ def drm_report_task():
 
         # Here we assign the new sample to be the "previous" for the next sample
         rain_previous = rain_calc
-
-        # rain_acc = rain_acc + rain_calc
-        # rain_acc_f = "{:.5f}".format(rain_acc)
-        # print_log("  - Rain accumulated: {} L".format(rain_acc_f))
 
         wind_calc = get_wind()
         print_log("  - Wind: {} km/h".format(wind_calc))
@@ -1357,9 +1353,6 @@ def microbit_data(data):
     wind_dir = meas_items["current_windDirection_List"]
     luminosity = meas_items["lightVal"]
 
-    # meas_data = [temp, moist, pres, rain, wind, wind_dir, luminosity]
-    # return meas_data
-
 
 def read_microbit():
     """
@@ -1409,6 +1402,22 @@ def main():
     print(" +-----------------------------------+\n")
 
     global device, current_time
+
+    # Create and configure the serial port settings
+    ser = serial.Serial()
+    ser.baudrate = BAUD_RATE
+    ser.port = PORT
+    ser.stopbits = STOP_BITS
+    ser.bytesize = N_DATA_BITS
+    ser.parity = PARITY
+    ser.rtscts = RTS_CTS
+    data = "reset"
+
+    # Open the serial port
+    ser.open()
+    # Send data thought the serial port
+    ser.write(data.encode())
+    ser.close()
 
     # Register callbacks for signals processing.
     signal.signal(signal.SIGTERM, signal_handler)
