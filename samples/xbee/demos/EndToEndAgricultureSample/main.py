@@ -1307,8 +1307,10 @@ def is_old_firmware():
     Returns:
         Boolean: ``True`` if the device firmware is old, ``False`` otherwise.
     """
-    # Read firmware version from runt.
+    # Read firmware version from runt. If it could not be read assume old fw.
     fw_version = get_runt(PROP_FW_VERSION)
+    if fw_version is None:
+        return True
 
     # Compare firmware year and month with old versions.
     year = int(fw_version.split(".")[0])
@@ -1468,3 +1470,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
