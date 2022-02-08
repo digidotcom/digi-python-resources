@@ -1,4 +1,4 @@
-# Copyright 2020, 2021, Digi International Inc.
+# Copyright 2020-2022, Digi International Inc.
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -20,7 +20,7 @@ from pymodbus.client.sync import ModbusSerialClient as ModbusClient
 
 # Modbus RTU settings
 # TODO: Replace with the serial port to use.
-PORT = "/dev/ttymxc1"
+PORT = "/dev/serial/port1"
 # TODO: Replace with the preferred baud rate.
 BAUD_RATE = 9600
 

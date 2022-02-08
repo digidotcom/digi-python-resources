@@ -1,4 +1,4 @@
-# Copyright 2020, Digi International Inc.
+# Copyright 2020-2022, Digi International Inc.
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -16,7 +16,7 @@ import time
 import serial
 
 # TODO: Replace with the serial port used to receive data.
-PORT = "/dev/ttymxc2"
+PORT = "/dev/serial/port1"
 # TODO: Replace with the preferred baud rate.
 BAUD_RATE = 9600
 
