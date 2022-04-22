@@ -548,8 +548,6 @@ class NetworkUpdater(Thread):
         result = xnet.update_nodes(update_tasks.values())
         if log.isEnabledFor(logging.INFO):
             self._show_result(result, update_tasks)
-        # time.sleep(20)
-        # log.info("Finished!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         # Clear the update tasks after finishing
         update_tasks.clear()
