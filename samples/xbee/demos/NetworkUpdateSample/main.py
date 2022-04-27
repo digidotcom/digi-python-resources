@@ -1,4 +1,4 @@
-# Copyright (c) 2021, Digi International, Inc.
+# Copyright (c) 2021, 2022, Digi International, Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -537,6 +537,7 @@ class NetworkUpdater(Thread):
         """
         if not update_tasks:
             log.error("No update tasks to perform")
+            self._request = None
             return
 
         if log.isEnabledFor(logging.INFO):
