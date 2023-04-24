@@ -1,41 +1,29 @@
-Digi Remote Manager Send Multiple Data Points
-=============================================
+Manage LEDs Sample Application
+==============================
 
-This sample Python application shows how to send multiple data points from your
-XBee Gateway to Digi Remote Manager.
+This sample Python application shows how to acquire the control of the device
+LEDs to manage them using the `led` Python submodule.
+
+The example acquires the control of all the device LEDs and sets their state to
+flash during 10 seconds. Then, it returns the LEDs to the system control.
 
 Requirements
 ------------
 To run this example you will need:
 
-* An XBee Gateway device.
-* A Digi Remote Manager account with your XBee Gateway added to it.
-  Go to https://myaccount.digi.com/ to create it if you do not have one.
+* A Digi Cellular router or XBee gateway device.
 
 Setup
 -----
-Make sure the hardware is set up correctly:
-
-1. Ensure that your gateway is connected to Digi Remote Manager.
+1. Ensure that the Digi Device is powered.
 
 Run
 ---
-The example is already configured, so all you need to do is to compile and
-launch the application. When executed, it starts uploading the temperature,
-CPU usage and free memory of the XBee Gateway to your Digi Remote Manager
-account every 10 seconds during a minute.
+1. The example is already configured, so all you need to do is to build and
+   launch the **Manage LEDs** application in the Digi device.
 
-Follow these steps to verify the data is being uploaded to your Digi
-Remote Manager account:
-
-1. Log in your Digi Remote Manager account using your credentials:
-   https://remotemanager.digi.com/login.do
-2. Within the Digi Remote Manager platform, select the **Data Streams**
-   option of the list at the left.
-3. Look for the streams **multi_temperature**, **multi_cpu_usage** and
-   **multi_free_mem**.
-4. Select the streams and verify the charts display the temperature, CPU
-   usage and free memory of the module as they are being sent.
+2. As soon as the application is started, all the LEDs of the device start
+   flashing for 10 seconds. Then, they return to their default state.
 
 Supported platforms
 -------------------
@@ -62,7 +50,7 @@ Supported platforms
 
 License
 -------
-Copyright (c) 2021-2023, Digi International, Inc.
+Copyright (c) 2023, Digi International, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -7,4 +7,12 @@
         <icon>category_gateway.png</icon>
         <icon_selected>category_gateway_selected.png</icon_selected>
     </category>
+    <category id="cellular_router">
+        <name>Cellular Routers</name>
+        <description>Cellular routers and extenders.</description>
+        <project_type>Python</project_type>
+        <dest_path>/etc/config</dest_path>
+        <icon>category_cellular_router.png</icon>
+        <icon_selected>category_cellular_router_selected.png</icon_selected>
+    </category>
 </categories>
