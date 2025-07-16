@@ -139,4 +139,11 @@
         <discovery_pattern>Digi TX64-Rail-Single-Cellular ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002450/default.htm</documentation_url>
     </platform>
+    <platform id="Digi XBee Hive Wi-SUN">
+        <icon>digi-xbee-hive.png</icon>
+        <name>Digi XBee Hive Wi-SUN</name>
+        <category_id>xbee_gateway</category_id>
+        <discovery_pattern>Digi XBee Hive Wi-SUN(?: W)?(?: (?:EU|IN|JP|NA))? ?\[(.*)\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://docs.digi.com/resources/documentation/digidocs/rf-docs/wisun/index.html</documentation_url>
+    </platform>
 </platforms>
