@@ -68,6 +68,7 @@ Supported platforms
 * Digi TX54
 * Digi TX64
 * Digi TX64 Rail
+* Digi XBee Hive Wi-SUN
 
 License
 -------
