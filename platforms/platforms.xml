@@ -13,7 +13,7 @@
         <discovery_pattern>Digi Connect EZ Mini ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002409/default.htm</documentation_url>
     </platform>
-    <platform id="ConnectEZ2">
+    <platform id="Digi Connect EZ 2">
         <icon>connect-ez-2.png</icon>
         <name>Digi Connect EZ 2</name>
         <category_id>cellular_router</category_id>

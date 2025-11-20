@@ -63,7 +63,7 @@ Supported platforms
 -------------------
 * AnywhereUSBPlus
 * ConnectEZMini
-* ConnectEZ2
+* Digi Connect EZ 2
 * Digi Connect EZ 4
 * Digi Connect EZ 8
 * Digi Connect EZ 16/32
