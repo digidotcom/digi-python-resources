@@ -61,8 +61,8 @@ Supported platforms
 * IX30
 * LR54
 * TX54
-* TX64
-* TX64Rail
+* Digi TX64
+* Digi TX64 Rail
 
 License
 -------

@@ -125,14 +125,14 @@
         <discovery_pattern>Digi TX54-(Dual-Cellular|Dual-Wi-Fi|Single-Cellular) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002357/default.htm</documentation_url>
     </platform>
-	<platform id="TX64">
+	<platform id="Digi TX64">
         <icon>tx64.png</icon>
         <name>Digi TX64</name>
         <category_id>cellular_router</category_id>
         <discovery_pattern>Digi TX64 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002348/default.htm</documentation_url>
     </platform>
-	<platform id="TX64Rail">
+	<platform id="Digi TX64 Rail">
         <icon>tx64r.png</icon>
         <name>Digi TX64 Rail</name>
         <category_id>cellular_router</category_id>
