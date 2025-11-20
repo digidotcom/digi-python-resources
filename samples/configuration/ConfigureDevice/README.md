@@ -84,7 +84,7 @@ Supported platforms
 * IX20
 * IX30
 * LR54
-* TX54
+* Digi TX54
 * Digi TX64
 * Digi TX64 Rail
 

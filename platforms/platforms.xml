@@ -118,7 +118,7 @@
         <discovery_pattern>Digi LR54W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002386/default.htm</documentation_url>
     </platform>	
-    <platform id="TX54">
+    <platform id="Digi TX54">
         <icon>tx54.png</icon>
         <name>Digi TX54</name>
         <category_id>cellular_router</category_id>
