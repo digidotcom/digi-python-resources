@@ -77,7 +77,7 @@ Supported platforms
 * ConnectIT4
 * ConnectIT1648
 * EX12
-* EX15
+* Digi EX15/EX15W
 * Digi EX50
 * Digi IX10
 * Digi IX15 XBee Gateway
