@@ -84,7 +84,7 @@ Supported platforms
 * EX50
 * IX10
 * IX15
-* IX20
+* Digi IX20/IX20W
 * Digi IX30
 * Digi LR54/LR54W
 * Digi TX54
