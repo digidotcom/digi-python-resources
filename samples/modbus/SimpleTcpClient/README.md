@@ -32,7 +32,7 @@ Run
 
 Supported platforms
 -------------------
-* IX15
+* Digi IX15 XBee Gateway
 
 License
 -------

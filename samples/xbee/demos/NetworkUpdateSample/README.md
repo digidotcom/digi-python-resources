@@ -192,7 +192,7 @@ To verify the application is working properly, check the following:
 
 Supported platforms
 -------------------
-* IX15
+* Digi IX15 XBee Gateway
 
 License
 -------

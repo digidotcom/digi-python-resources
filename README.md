@@ -26,7 +26,7 @@ Requirements
 Modules and samples within the repository can be executed only in Digi devices
 with Python support. This is the list of current compatible devices:
 
-* IX15
+* Digi IX15 XBee Gateway
 
 
 Organization
