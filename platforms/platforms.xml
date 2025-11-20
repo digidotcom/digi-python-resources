@@ -55,7 +55,7 @@
         <discovery_pattern>Digi ConnectIT4 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002355/default.htm</documentation_url>
     </platform>
-    <platform id="ConnectIT1648">
+    <platform id="Digi Connect IT 16/48">
         <icon>connect-it-48.png</icon>
         <name>Digi Connect IT 16/48</name>
         <category_id>cellular_router</category_id>

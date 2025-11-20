@@ -53,7 +53,7 @@ Supported platforms
 * ConnectEZ1632
 * ConnectITMini
 * ConnectIT4
-* ConnectIT1648
+* Digi Connect IT 16/48
 * Digi EX12
 * Digi EX15/EX15W
 * Digi EX50
