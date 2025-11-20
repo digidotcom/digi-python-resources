@@ -1,5 +1,5 @@
 <platforms>
-    <platform id="AnywhereUSBPlus">
+    <platform id="Digi AnywhereUSB 2/8/24">
         <icon>anywhere-usb.png</icon>
         <name>Digi AnywhereUSB 2/8/24</name>
         <category_id>cellular_router</category_id>

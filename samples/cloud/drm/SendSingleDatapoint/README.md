@@ -38,7 +38,7 @@ Remote Manager account:
 
 Supported platforms
 -------------------
-* AnywhereUSBPlus
+* Digi AnywhereUSB 2/8/24
 * Digi Connect EZ Mini
 * Digi Connect EZ 2
 * Digi Connect EZ 4
