@@ -27,7 +27,7 @@
         <discovery_pattern>Digi Connect EZ 4 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002459/default.htm</documentation_url>
     </platform>
-    <platform id="ConnectEZ8">
+    <platform id="Digi Connect EZ 8">
         <icon>connect-ez-8.png</icon>
         <name>Digi Connect EZ 8</name>
         <category_id>cellular_router</category_id>

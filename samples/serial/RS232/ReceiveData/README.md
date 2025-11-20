@@ -47,7 +47,7 @@ Supported platforms
 * ConnectEZMini
 * ConnectEZ2
 * ConnectEZ4
-* ConnectEZ8
+* Digi Connect EZ 8
 * Digi Connect EZ 16/32
 * Digi Connect IT Mini
 * Digi Connect IT 4
