@@ -111,7 +111,7 @@
         <discovery_pattern>Digi IX30 ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002452/default.htm</documentation_url>
     </platform>
-    <platform id="LR54">
+    <platform id="Digi LR54/LR54W">
         <icon>lr54.png</icon>
         <name>Digi LR54/LR54W</name>
         <category_id>cellular_router</category_id>

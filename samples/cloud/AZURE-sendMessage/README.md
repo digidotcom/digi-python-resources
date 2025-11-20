@@ -47,7 +47,7 @@ Supported platforms
 * IX15
 * IX20
 * IX30
-* LR54
+* Digi LR54/LR54W
 * Digi TX54
 * Digi TX64
 * Digi TX64 Rail
