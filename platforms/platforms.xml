@@ -104,7 +104,7 @@
         <discovery_pattern>Digi IX20W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002381/default.htm</documentation_url>
     </platform>
-    <platform id="IX30">
+    <platform id="Digi IX30">
         <icon>ix30.png</icon>
         <name>Digi IX30</name>
         <category_id>cellular_router</category_id>

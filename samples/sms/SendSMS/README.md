@@ -60,7 +60,7 @@ Supported platforms
 * IX10
 * IX15
 * IX20
-* IX30
+* Digi IX30
 * Digi LR54/LR54W
 * Digi TX54
 * Digi TX64
