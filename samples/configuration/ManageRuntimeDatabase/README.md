@@ -82,7 +82,7 @@ Supported platforms
 * EX12
 * EX15
 * EX50
-* IX10
+* Digi IX10
 * Digi IX15 XBee Gateway
 * Digi IX20/IX20W
 * Digi IX30
