@@ -79,7 +79,7 @@ Supported platforms
 * ConnectITMini
 * ConnectIT4
 * ConnectIT1648
-* EX12
+* Digi EX12
 * Digi EX15/EX15W
 * Digi EX50
 * Digi IX10
