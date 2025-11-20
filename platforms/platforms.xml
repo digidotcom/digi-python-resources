@@ -76,7 +76,7 @@
         <discovery_pattern>Digi EX15W? ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002344/default.htm</documentation_url>
     </platform>
-    <platform id="EX50">
+    <platform id="Digi EX50">
         <icon>ex50.png</icon>
         <name>Digi EX50</name>
         <category_id>cellular_router</category_id>

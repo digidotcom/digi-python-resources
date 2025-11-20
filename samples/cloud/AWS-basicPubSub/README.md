@@ -49,7 +49,7 @@ Supported platforms
 * ConnectIT1648
 * EX12
 * EX15
-* EX50
+* Digi EX50
 * Digi IX10
 * Digi IX15 XBee Gateway
 * Digi IX20/IX20W
