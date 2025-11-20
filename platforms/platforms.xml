@@ -41,7 +41,7 @@
         <discovery_pattern>Digi Connect EZ (16/16 MEI/32/32 MEI) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/Digidocs/90002540/default.htm</documentation_url>
     </platform>
-    <platform id="ConnectITMini">
+    <platform id="Digi Connect IT Mini">
         <icon>connect-it-mini.png</icon>
         <name>Digi Connect IT Mini</name>
         <category_id>cellular_router</category_id>
