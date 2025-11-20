@@ -6,7 +6,7 @@
         <discovery_pattern>Digi AnywhereUSB( 2 Industrial|8|8W|24|24W) ?\[[0-9a-fA-F]{12}\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://www.digi.com/resources/documentation/digidocs/90002383/default.htm</documentation_url>
     </platform>
-	<platform id="ConnectEZMini">
+	<platform id="Digi Connect EZ Mini">
         <icon>connect-ez-mini.png</icon>
         <name>Digi Connect EZ Mini</name>
         <category_id>cellular_router</category_id>

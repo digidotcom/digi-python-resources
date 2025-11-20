@@ -46,7 +46,7 @@ Run
 Supported platforms
 -------------------
 * AnywhereUSBPlus
-* ConnectEZMini
+* Digi Connect EZ Mini
 * Digi Connect EZ 2
 * Digi Connect EZ 4
 * Digi Connect EZ 8
