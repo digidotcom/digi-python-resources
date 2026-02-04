@@ -32,7 +32,7 @@ Run
 Supported platforms
 -------------------
 * Digi IX15 XBee Gateway
-* Digi XBee Hive Wi-SUN
+* Digi XBee Hive for Wi-SUN
 
 License
 -------

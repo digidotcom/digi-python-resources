@@ -28,7 +28,7 @@ To run this example you need:
 Setup
 -----
 
-1. Ensure the XBee Wi-SUN module is in the same network as the Digi XBee Hive Wi-SUN device.
+1. Ensure the XBee Wi-SUN module is in the same network as the Digi XBee Hive for Wi-SUN device.
 
 Run
 ---
@@ -42,7 +42,7 @@ launch. To obtain that value:
 4. Click **Settings** in the left sidebar to open the settings page. This reads
    all the settings automatically.
 5. Search the **MY** setting. This is the value you have to pass as parameter
-   to the Python application of the Digi XBee Hive Wi-SUN device.
+   to the Python application of the Digi XBee Hive for Wi-SUN device.
 
 Ensure to pass the XBee Device's IPv6 address as parameter to the example application. To do so from PyCharm:
 
@@ -60,7 +60,7 @@ started section of the documentation for more information about the exercise.
 Supported platforms
 -------------------
 
-* Digi XBee Hive Wi-SUN - minimum firmware version: 25.8.138.60
+* Digi XBee Hive for Wi-SUN - minimum firmware version: 25.8.138.60
 
 License
 -------
