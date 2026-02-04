@@ -75,6 +75,7 @@ Run
 Supported platforms
 -------------------
 * Digi IX15 XBee Gateway
+* Digi XBee Hive
 
 License
 -------

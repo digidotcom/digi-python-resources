@@ -61,6 +61,7 @@ to test the demo.
 Supported platforms
 -------------------
 * Digi IX15 XBee Gateway
+* Digi XBee Hive
 
 License
 -------

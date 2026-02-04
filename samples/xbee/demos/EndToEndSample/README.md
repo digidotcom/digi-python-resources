@@ -91,6 +91,7 @@ To verify the application is working properly, check the following:
 Supported platforms
 -------------------
 * Digi IX15 XBee Gateway
+* Digi XBee Hive
 
 License
 -------

@@ -146,4 +146,11 @@
         <discovery_pattern>Digi XBee Hive Wi-SUN(?: W)?(?: (?:EU|IN|JP|NA))? ?\[(.*)\] ?\(ssh\)</discovery_pattern>
         <documentation_url>https://docs.digi.com/resources/documentation/digidocs/rf-docs/wisun/index.html</documentation_url>
     </platform>
+    <platform id="Digi XBee Hive">
+        <icon>digi-xbee-hive.png</icon>
+        <name>Digi XBee Hive</name>
+        <category_id>xbee_gateway</category_id>
+        <discovery_pattern>Digi XBee Hive(?: (?:2\.4 GHz|868 MHz|900 MHz|920 MHz))?(?: W)?(?: (?:EU|IN|JP|NA))? ?\[(.*)\] ?\(ssh\)</discovery_pattern>
+        <documentation_url>https://hub.digi.com/dp/path=/support/asset/xbee-hive-gateway-user-guide/</documentation_url>
+    </platform>
 </platforms>
